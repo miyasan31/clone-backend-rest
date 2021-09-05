@@ -12,8 +12,9 @@ import { TypeOrmConfigService } from './config/typeorm-config.service';
      *   default.envは後続で呼ばれる。同じ変数がある場合は先に定義されているものが優先される。
      */
     ConfigModule.forRoot({
-      envFilePath: [`.env/${process.env.NODE_ENV}.env`, '.env/default.env'],
+      envFilePath: [`.env/${process.env.NODE_ENV}.env`],
       isGlobal: true,
+      // ignoreEnvFile: true, // <- 環境変数から取得する場合はコメントアウトを外す．
     }),
 
     // TypeORMの設定を非同期取得に変更

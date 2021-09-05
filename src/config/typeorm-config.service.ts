@@ -9,14 +9,14 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
     const configService = new ConfigService();
     return {
       type: 'postgres',
-      host: configService.get<string>('DB_HOSTNAME'),
-      port: configService.get<number>('DB_PORT'),
-      username: configService.get<string>('DB_USERNAME'),
-      password: configService.get<string>('DB_PASSWORD'),
-      database: configService.get<string>('DB_NAME'),
+      host: configService.get<string>('DATABASE_HOSTNAME'),
+      port: Number(configService.get<number>('DATABASE_PORT')),
+      username: configService.get<string>('DATABASE_USERNAME'),
+      password: configService.get<string>('DATABASE_PASSWORD'),
+      database: configService.get<string>('DATABASE_NAME'),
       entities: [__dirname + '/../**/*.entity.{js,ts}'],
       synchronize: this.strToBoolean(
-        configService.get<string>('DB_SYNC', 'false'),
+        configService.get<string>('DATABASE_SYNC', 'false'),
       ),
     };
   }
