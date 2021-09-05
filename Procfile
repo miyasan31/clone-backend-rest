@@ -1,1 +1,1 @@
-web: NODE_ENV=development yarn start:prod
+web: NODE_ENV=production np, run start:prod
