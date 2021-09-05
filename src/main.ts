@@ -16,7 +16,7 @@ async function bootstrap() {
   console.log(`TypeORM synchronize is [ ${sync} ]`);
 
   const port = configService.get('API_PORT');
-  await app.listen(port);
+  await app.listen(port || 3000);
 }
 
 bootstrap();
