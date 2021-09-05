@@ -12,11 +12,11 @@ async function bootstrap() {
   // https://qiita.com/piggydev/items/e76adcc3a65364f98537
   const configService = new ConfigService();
 
-  const sync = configService.get('DB_SYNC');
+  const sync = configService.get('DATABASE_SYNC');
   console.log(`TypeORM synchronize is [ ${sync} ]`);
 
   // const port = configService.get('API_PORT');
-  await app.listen(3000);
+  await app.listen(4000);
 }
 
 bootstrap();
