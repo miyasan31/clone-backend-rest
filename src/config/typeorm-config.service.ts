@@ -18,6 +18,10 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
       synchronize: this.strToBoolean(
         configService.get<string>('DATABASE_SYNC', 'false'),
       ),
+      ssl:
+        process.env.NODE_ENV === 'production'
+          ? { rejectUnauthorized: false }
+          : false,
     };
   }
   // get<boolean>が上手く変換してくれないため泣く泣く対応
