@@ -1,9 +1,6 @@
 import { IsNotEmpty } from 'class-validator';
 
-export class InputUserDto {
-  @IsNotEmpty()
-  userId: string;
-
+export class UpdateUserDto {
   @IsNotEmpty()
   userName: string;
 
@@ -11,5 +8,3 @@ export class InputUserDto {
 
   iconId: string;
 }
-
-// @IsNotEmpty()は「"",null,undefined」を受け入れない

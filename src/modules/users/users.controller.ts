@@ -9,7 +9,8 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { InputUserDto } from './dto/input-user.dto';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersService } from './users.service';
 import { User } from './entity/user.entity';
 // import { UserRequestPipe } from './pipe/user-status.pipe';
@@ -32,21 +33,19 @@ export class UsersController {
 
   // POST - /users
   @Post()
-  // InputUserDtoで定義した@IsNotEmpty()が有効になる
+  // CreateUserDtoで定義した@IsNotEmpty()が有効になる
   @UsePipes(ValidationPipe)
-  createUser(@Body() UserDto: InputUserDto): Promise<User> {
-    return this.usersService.createUser(UserDto);
+  createUser(@Body() createUserDto: CreateUserDto): Promise<User> {
+    return this.usersService.createUser(createUserDto);
   }
 
   // PATCH - /users/[userId]
   @Patch('/:userId')
   updateUser(
     @Param('userId') userId: string,
-    @Body('userName') userName: string,
-    @Body('profileBody') profileBody: string,
-    @Body('iconId') iconId: string,
+    @Body('userDto') updateUserDto: UpdateUserDto,
   ): Promise<User> {
-    return this.usersService.updateUser(userId, userName, profileBody, iconId);
+    return this.usersService.updateUser(userId, updateUserDto);
   }
 
   // DELETE - /users/[userId]

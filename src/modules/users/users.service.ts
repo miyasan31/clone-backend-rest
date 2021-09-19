@@ -5,7 +5,8 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { InputUserDto } from './dto/input-user.dto';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entity/user.entity';
 
 @Injectable()
@@ -37,10 +38,7 @@ export class UsersService {
   }
 
   // 🧩 新規レコード作成
-  async createUser(InputUserDto: InputUserDto): Promise<User> {
-    // リクエストボディからデータを取得
-    const { userId, userName, profileBody, iconId } = InputUserDto;
-
+  async createUser(createUserDto: CreateUserDto): Promise<User> {
     // getUserById()を呼び出して、idが該当するレコード取得
     // const userCheck = await this.getUserById(userId);
 
@@ -52,10 +50,10 @@ export class UsersService {
     const user = new User();
 
     // インスタンスに代入
-    user.userId = userId;
-    user.userName = userName;
-    user.profileBody = profileBody;
-    user.iconId = iconId;
+    user.userId = createUserDto.userId;
+    user.userName = createUserDto.userName;
+    user.profileBody = createUserDto.profileBody;
+    user.iconId = createUserDto.iconId;
 
     try {
       // save()でリポジトリを更新
@@ -72,16 +70,14 @@ export class UsersService {
   // ✨ レコード更新
   async updateUser(
     userId: string,
-    userName: string,
-    profileBody: string,
-    iconId: string,
+    updateUserDto: UpdateUserDto,
   ): Promise<User> {
     // getUserById()を呼び出して、idが該当するレコード取得
     const user = await this.getOneUser(userId);
     // 該当レコードのstatusにパラメーター代入
-    user.userName = userName;
-    user.profileBody = profileBody;
-    user.iconId = iconId;
+    user.userName = updateUserDto.userName;
+    user.profileBody = updateUserDto.profileBody;
+    user.iconId = updateUserDto.iconId;
     // save()で、該当レコード更新
     await this.userRepository.save(user);
     // 更新後のレコードを返す
