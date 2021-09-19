@@ -16,7 +16,7 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
       database: configService.get<string>('DATABASE_NAME'),
       entities: [__dirname + '/../**/*.entity.{js,ts}'],
       synchronize: this.strToBoolean(
-        configService.get<string>('DATABASE_SYNC', 'false'),
+        configService.get<string>('DATABASE_SYNC'),
       ),
       ssl:
         process.env.NODE_ENV === 'production'
