@@ -1,8 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TasksModule } from './tasks/tasks.module';
-import { UsersModule } from './users/users.module';
+import { UsersModule } from './modules/users/users.module';
 import { TypeOrmConfigService } from './config/typeorm-config.service';
 
 @Module({
@@ -22,8 +21,6 @@ import { TypeOrmConfigService } from './config/typeorm-config.service';
       imports: [ConfigModule],
       useClass: TypeOrmConfigService,
     }),
-
-    TasksModule,
 
     UsersModule,
   ],
